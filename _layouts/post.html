@@ -19,7 +19,8 @@ layout: default
 <div class=" tc-reveal">
 <div class="tc-tags-wrapper">
     {% for each_tag in page.tags %}
-    <span class="tc-tag-list-item"><button class="tc-btn-invisible tc-tag-label" style="background-color:; fill:#333333; color:#333333;"><span class="tc-tag-list-item">{{each_tag}}</span></button></span>
+        {% include tag.html tag=each_tag %}
+
     {% endfor %}
 </div>
 </div>
