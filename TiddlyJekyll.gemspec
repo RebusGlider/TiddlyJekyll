@@ -8,7 +8,6 @@ Gem::Specification.new do |spec|
 
   spec.summary       = "A Jekyll Theme based on TiddlyWiki5 and suitable for use in github pages"
   spec.homepage      = "TODO: Put your gem's website or public repo URL here."
-  spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").select { |f| f.match(%r{^(assets|_layouts|_includes|_sass|LICENSE|README)}i) }
 
