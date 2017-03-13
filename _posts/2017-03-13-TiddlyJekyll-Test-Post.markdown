@@ -2,6 +2,10 @@
 layout: post
 title:  "The TiddlyJekyll Theme Test Post"
 date:   2017-03-13 12:50:00 +1100
+tags:
+-   default
+-   basic
+-   theme
 ---
 Lorem ipsum dolor sit amet, vis inermis consequat in. Esse fuisset periculis mei et, eam illud intellegat ut. No cum accusam ancillae, ea mei lorem cetero reprehendunt. Partem putent adipiscing et usu. Aeque libris ex mea.
 

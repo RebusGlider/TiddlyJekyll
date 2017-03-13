@@ -3,39 +3,28 @@ layout: default
 ---
 <div class="tc-tiddler-title">
 <div class="tc-titlebar">
-    <h2 class="tc-title">About</h2>
+    <h2 class="tc-title">{{page.title}}</h2>
 </div>
 </div>
 <div class=" tc-reveal">
 <div class="tc-subtitle">
-    <a class="tc-tiddlylink tc-tiddlylink-missing" href="#"></a> 16th September 2014 at 11:20pm
+    Posted on {{ page.date | date_to_long_string }}
+    {% if page.author %}
+        by {{ page.author }}
+    {% elsif site.author %}
+        by {{ site.author }}
+    {% endif %}
+    TODO: Make date ordinal like TiddlyWiki
 </div>
 </div>
 <div class=" tc-reveal">
 <div class="tc-tags-wrapper">
-    <span class="tc-tag-list-item"><button class="tc-btn-invisible tc-tag-label" style="background-color:; fill:#333333; color:#333333;"><span class="tc-tag-list-item">TableOfContents</span></button></span>
+    {% for each_tag in page.tags %}
+    <span class="tc-tag-list-item"><button class="tc-btn-invisible tc-tag-label" style="background-color:; fill:#333333; color:#333333;"><span class="tc-tag-list-item">{{each_tag}}</span></button></span>
+    {% endfor %}
 </div>
 </div>
 <div class="tc-tiddler-body tc-reveal">
-<p>Information about the making of <a class="tc-tiddlylink tc-tiddlylink-resolves" href="#TiddlyWiki">TiddlyWiki</a>:</p>
-<p></p>
-<ul class="">
-    <li>
-        <a class="tc-tiddlylink tc-tiddlylink-resolves" href="#Acknowledgements">Acknowledgements</a>
-    </li>
-    <li>
-        <a class="tc-tiddlylink tc-tiddlylink-resolves" href="#Contributors">Contributors</a>
-    </li>
-    <li>
-        <a class="tc-tiddlylink tc-tiddlylink-resolves" href="#History%20of%20TiddlyWiki">History of TiddlyWiki</a>
-    </li>
-    <li>
-        <a class="tc-tiddlylink tc-tiddlylink-resolves" href="#Releases">Releases</a>
-    </li>
-    <li>
-        <a class="tc-tiddlylink tc-tiddlylink-resolves" href="#RoadMap">RoadMap</a>
-    </li>
-</ul>
-<p></p>
-</div>
 {{ content }}
+</div>
+
