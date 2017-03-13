@@ -1,3 +1,10 @@
 ---
 layout: default
 ---
+<ul>
+    {% for each_post in site.posts %}
+    <li>
+        <a class="tc-tiddlylink tc-tiddlylink-resolves" href="{{ each_post.url }}">{{ each_post.title }}</a>
+    </li>
+    {% endfor %}
+</ul>
