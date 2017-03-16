@@ -2,6 +2,40 @@
 layout: default
 ---
 {% include searchIndex.html %}
+<script>
+
+function displaySearchResults(results,store) {
+    NumberOfMatches = document.getElementById("NumberOfMatches")
+    ResultsDisplay = document.getElementById("ResultsDisplay")
+    if (results.length == 1) {
+        NumberOfMatches.innerHTML = "" + results.length + " match";
+    } else {
+        NumberOfMatches.innerHTML = "" + results.length + " matches";
+    }
+    var resultsHTML = ""
+    for (var i = 0; i<results.length; i++) {
+        var post = store[results[i].ref];
+        resultsHTML += '<div class="tc-menu-list-item">'
+        resultsHTML += '<a class="tc-tiddlylink tc-tiddlylink-resolves" href="';
+        resultsHTML += post.url;
+        resultsHTML += '" >';
+        resultsHTML += post.title;
+        resultsHTML += '</a>';
+        resultsHTML += '</div>';
+    }
+    ResultsDisplay.innerHTML = resultsHTML;
+}
+</script>
+<script src="assets/js/querystring.js"></script>
+<script>
+window.onload = function() {
+    var q = querystring.parse(location.search).query;
+    if (q) {
+        var results = SiteSearch.search(q);
+        displaySearchResults(results,posts_store);
+    }
+}
+</script>
 <div>
 <div class="tc-titlebar">
 
@@ -85,19 +119,9 @@ Filter
 
 </button>
 </span>
-</div></p><div class=" tc-reveal"><div class="tc-search-results"><p><em><small>3 matches</small></em></p><div class="tc-menu-list-item">
-<a class="tc-tiddlylink tc-tiddlylink-resolves" href="#%24%3A%2Fboot%2Fboot.js">
-$:/boot/boot.js
-</a>
-</div><div class="tc-menu-list-item">
-<a class="tc-tiddlylink tc-tiddlylink-resolves" href="#%24%3A%2Fcore">
-$:/core
-</a>
-</div><div class="tc-menu-list-item">
-<a class="tc-tiddlylink tc-tiddlylink-resolves" href="#%24%3A%2Fplugins%2Ftiddlywiki%2Fbrowser-sniff">
-$:/plugins/tiddlywiki/browser-sniff
-</a>
-</div></div></div><div class=" tc-reveal" hidden="true"></div></div><div class=" tc-reveal" hidden="true"></div><div class=" tc-reveal" hidden="true"></div>
+</div></p><div class=" tc-reveal"><div class="tc-search-results"><p><em><small><span id="NumberOfMatches">--------</span></small></em></p>
+<div id="ResultsDisplay"></div>
+</div></div><div class=" tc-reveal" hidden="true"></div></div><div class=" tc-reveal" hidden="true"></div><div class=" tc-reveal" hidden="true"></div>
 </div>
 </div>
 </div>
