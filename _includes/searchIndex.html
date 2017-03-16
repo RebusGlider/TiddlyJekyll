@@ -1,0 +1,37 @@
+<script src="/assets/js/lunr.min.js"></script>
+<script>
+window.SiteSearch = lunr(function () {
+    this.field('id');
+    this.field('title',  { boost: 6 });
+    this.field('author', { boost:4 });
+    this.field('tags',   {boost: 2});
+    this.field('categories', { boost:2 });
+    this.field('content');
+  });
+
+    posts_store = {
+    {% for post in site.posts %}
+      "{{ post.url | slugify }}": {
+        "title": "{{ post.title | xml_escape }}",
+        "author": "{{ post.author | xml_escape }}",
+        "categories": "{{ post.category | xml_escape }}",
+        "tags": "{% for tag in post.tags %} {{tag}} {% endfor%}",
+        "content": {{ post.content | strip_html | strip_newlines | jsonify }},
+        "url": "{{ post.url | xml_escape }}",
+      },
+    {% endfor %}
+  };
+
+
+for (var key in posts_store) {
+    window.SiteSearch.add({
+      'id': key,
+      'title': posts_store[key].title,
+      'author': posts_store[key].author,
+      'categories': posts_store[key].category,
+      'tags':posts_store[key].tags,
+      'content': posts_store[key].content,
+    });
+}
+
+</script>
