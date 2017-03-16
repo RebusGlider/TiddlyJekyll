@@ -55,6 +55,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 ===================================================================================
-querystring.js is a small library used for getting get parameters from URLs.
-It is copyrighted by Greg Allen also known as Github user jgallen23 and licensed
-under the MIT license.
+querystring.js is a small library used for getting GET request parameters from
+URLs. It is copyrighted by Greg Allen also known as Github user jgallen23 and
+licensed under the MIT license.
+
+===================================================================================
+Lunr.js is a library for implementing javascript search in static websites.
+It is copyrighted by Oliver Nightingale and licensed under the MIT license.
+
+===================================================================================
