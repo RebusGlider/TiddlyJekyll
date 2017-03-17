@@ -19,8 +19,13 @@ layout: default
 <div class=" tc-reveal">
 <div class="tc-tags-wrapper">
     {% for each_tag in page.tags %}
-        {% include tag.html tag=each_tag color='rgb(255,255,255)' background_color='rgb(0,0,0)' %}
-
+        {% assign data_tag = (site.post_tags | where: "name" , each_tag) %}
+        {% assign data_tag = data_tag[0] %}
+        {% if data_tag %}
+        {% include tag.html tag=each_tag color=data_tag.color background_color=data_tag.background_color %}
+        {% else %}
+            <br>{{each_tag}} Tag not found in post_tags collection<br>
+        {% endif %}
     {% endfor %}
 </div>
 </div>

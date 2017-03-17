@@ -30,3 +30,15 @@ gems:
 exclude:
   - Gemfile
   - Gemfile.lock
+
+collections:
+  - post_tags
+
+defaults:
+  - scope:
+      path: ""
+      type: "post_tags"
+    values:
+      background_color: "rgb(238, 204, 102)"
+      color: "rgb(0,0,0)"
+
