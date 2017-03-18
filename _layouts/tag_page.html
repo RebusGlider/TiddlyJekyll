@@ -1,10 +1,18 @@
 ---
 layout: default
 ---
-{% capture tagTitle %}Tagged:{{page.name}}{% endcapture %}
+{% capture tagTitle %}Tagged: {{page.name}}{% endcapture %}
+{% include title.html title=tagTitle %}
 {% assign tagged_posts = (site.tags[page.name]) %}
+<div class="tc-tiddler-body tc-reveal">
+<div class="tc-table-of-contents">
 <ul>
-{% for each_post in tagged_posts %}
-    <li><a href="{{each_post.url}}">{{each_post.title}}</a></li>
+{% for post in tagged_posts %}
+<li>
+    <a class="tc-tiddlylink tc-tiddlylink-resolves" href="{{post.url}}">{{post.title}}</a>
+    </li>
 {% endfor %}
 </ul>
+
+</div>
+</div>
