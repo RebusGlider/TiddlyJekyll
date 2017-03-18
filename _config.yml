@@ -32,13 +32,16 @@ exclude:
   - Gemfile.lock
 
 collections:
-  - post_tags
+    post_tags:
+        output: true
+        permalink: /tag/:name:output_ext
 
 defaults:
   - scope:
-      path: ""
-      type: "post_tags"
+        path: ""
+        type: "post_tags"
     values:
-      background_color: "rgb(238, 204, 102)"
-      color: "rgb(0,0,0)"
+        layout: tag_page
+        background_color: "rgb(238, 204, 102)"
+        color: "rgb(0,0,0)"
 
