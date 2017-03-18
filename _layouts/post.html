@@ -1,11 +1,7 @@
 ---
 layout: default
 ---
-<div class="tc-tiddler-title">
-<div class="tc-titlebar">
-    <h2 class="tc-title">{{page.title}}</h2>
-</div>
-</div>
+{% include title.html title=page.title %}
 <div class=" tc-reveal">
 <div class="tc-subtitle">
     Posted on {% include date.html date=page.date %}
