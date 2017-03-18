@@ -42,6 +42,7 @@ defaults:
         type: "post_tags"
     values:
         layout: tag_page
+        link: /tag/:name:output_ext
         background_color: "rgb(238, 204, 102)"
         color: "rgb(0,0,0)"
 
