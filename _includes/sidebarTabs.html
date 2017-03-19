@@ -1,64 +1,157 @@
-<div class="tc-tab-set">
-    <div class="tc-tab-buttons">
-        <button class="">Open</button> <button class=" tc-tab-selected">Contents</button> <button class="">Recent</button> <button class="">Tools</button> <button class="">More</button>
+<script src="/assets/js/domready.js"></script>
+<style>
+    
+</style>
+<script>
+sidebar_tabs = (function() {
+
+  'use strict';
+
+  /**
+   * tabs
+   *
+   * @description The Tabs component.
+   * @param {Object} options The options hash
+   */
+  var tabs = function(options) {
+    var el = document.querySelector(options.el);
+    var tabNavigationLinks = el.querySelectorAll(options.tabNavigationLinks);
+    var tabContentContainers = el.querySelectorAll(options.tabContentContainers);
+    var activeIndex = 0;
+    var initCalled = false;
+
+    /**
+     * init
+     *
+     * @description Initializes the component by removing the no-js class from
+     *   the component, and attaching event listeners to each of the nav items.
+     *   Returns nothing.
+     */
+    var init = function() {
+      if (!initCalled) {
+        initCalled = true;
+        el.classList.remove('no-js');
+        
+        for (var i = 0; i < tabNavigationLinks.length; i++) {
+          var link = tabNavigationLinks[i];
+          handleClick(link, i);
+        }
+      }
+    };
+
+    /**
+     * handleClick
+     *
+     * @description Handles click event listeners on each of the links in the
+     *   tab navigation. Returns nothing.
+     * @param {HTMLElement} link The link to listen for events on
+     * @param {Number} index The index of that link
+     */
+    var handleClick = function(link, index) {
+      link.addEventListener('click', function(e) {
+        console.log("CLICK");
+        e.preventDefault();
+        goToTab(index);
+      });
+    };
+
+    /**
+     * goToTab
+     *
+     * @description Goes to a specific tab based on index. Returns nothing.
+     * @param {Number} index The index of the tab to go to
+     */
+    var goToTab = function(index) {
+      console.log(index);
+      console.log(options);
+      if (index !== activeIndex && index >= 0 && index <= tabNavigationLinks.length) {
+        tabNavigationLinks[activeIndex].classList.remove(options.activeLinkClass);
+        tabNavigationLinks[index].classList.add(options.activeLinkClass);
+        tabContentContainers[activeIndex].classList.remove(options.activeContentClass);
+        tabContentContainers[index].classList.add(options.activeContentClass);
+        activeIndex = index;
+      }
+    };
+
+    /**
+     * Returns init and goToTab
+     */
+    return {
+      init: init,
+      goToTab: goToTab
+    };
+
+  };
+
+  /**
+   * Attach to global namespace
+   */
+  window.tabs = tabs;
+
+})();
+domReady(function() {
+    var myTabs = tabs({
+    el: '#tabs',
+    tabNavigationLinks: ".c-tab-link",
+    tabContentContainers: ".c-tab-content",
+    activeLinkClass: "tc-tab-selected",
+    activeContentClass: "selectedContent",
+
+  })
+  myTabs.init();
+});
+
+
+
+</script>
+<style>
+.c-tab-content {
+  display: none;
+}
+
+.c-tab-content.selectedContent {
+  display: block;
+}
+
+.c-tabs.no-js .c-tabs-nav {
+  display: none;
+}
+
+.c-tabs.no-js .c-tab-content{
+  display: block;
+  margin-bottom: 1.5rem;
+}
+
+.c-tab.no-js .c-tab:last-child {
+  margin-bottom: 0;
+}
+</style>
+<div id="tabs" class="tc-tab-set c-tabs no-js">
+    <div class="tc-tab-buttons c-tabs-nav">
+        <button class="c-tab-link tc-tab-selected">Related</button>
+        <button class="c-tab-link ">Recent</button>
+        <button class="c-tab-link">Archives</button>
+        <button class="c-tab-link">Contact</button>
     </div>
     <div class="tc-tab-divider"></div>
-    <div class="tc-tab-content">
+    <div class="c-tab-content tc-tab-content selectedContent">
         <div class=" tc-reveal">
-            <div class="tc-table-of-contents">
-                <p></p>
-                <ol class="tc-toc toc-selective-expandable">
-                    <li class="toc-item-selected">
-                        <a class="tc-tiddlylink tc-tiddlylink-resolves" href="#HelloThere"><span class=" tc-reveal"><button class="tc-btn-invisible"><span class=" tc-reveal"><svg class="tc-image-right-arrow tc-image-button" height="22pt" viewbox="0 0 128 128" width="22pt">
-                        <path d="M80.3563798,109.353315 C78.9238993,110.786918 76.9450203,111.675144 74.7592239,111.675144 L-4.40893546,111.675144 C-8.77412698,111.675144 -12.3248558,108.130732 -12.3248558,103.758478 C-12.3248558,99.3951199 -8.78077754,95.8418109 -4.40893546,95.8418109 L66.8418109,95.8418109 L66.8418109,24.5910645 C66.8418109,20.225873 70.3862233,16.6751442 74.7584775,16.6751442 C79.1218352,16.6751442 82.6751442,20.2192225 82.6751442,24.5910645 L82.6751442,103.759224 C82.6751442,105.941695 81.7891419,107.920575 80.3566508,109.353886 Z" transform="translate(35.175144, 64.175144) rotate(-45.000000) translate(-35.175144, -64.175144)"></path></svg></span></button></span> HelloThere</a>
-                    </li>
-                    <li class="toc-item-selected">
-                        <a class="tc-tiddlylink tc-tiddlylink-resolves" href="#Learning"><span class=" tc-reveal"><button class="tc-btn-invisible"><span class=" tc-reveal"><svg class="tc-image-right-arrow tc-image-button" height="22pt" viewbox="0 0 128 128" width="22pt">
-                        <path d="M80.3563798,109.353315 C78.9238993,110.786918 76.9450203,111.675144 74.7592239,111.675144 L-4.40893546,111.675144 C-8.77412698,111.675144 -12.3248558,108.130732 -12.3248558,103.758478 C-12.3248558,99.3951199 -8.78077754,95.8418109 -4.40893546,95.8418109 L66.8418109,95.8418109 L66.8418109,24.5910645 C66.8418109,20.225873 70.3862233,16.6751442 74.7584775,16.6751442 C79.1218352,16.6751442 82.6751442,20.2192225 82.6751442,24.5910645 L82.6751442,103.759224 C82.6751442,105.941695 81.7891419,107.920575 80.3566508,109.353886 Z" transform="translate(35.175144, 64.175144) rotate(-45.000000) translate(-35.175144, -64.175144)"></path></svg></span></button></span> Learning</a>
-                    </li>
-                    <li class="toc-item-selected">
-                        <a class="tc-tiddlylink tc-tiddlylink-resolves" href="#Working%20with%20TiddlyWiki"><span class=" tc-reveal"><button class="tc-btn-invisible"><span class=" tc-reveal"><svg class="tc-image-right-arrow tc-image-button" height="22pt" viewbox="0 0 128 128" width="22pt">
-                        <path d="M80.3563798,109.353315 C78.9238993,110.786918 76.9450203,111.675144 74.7592239,111.675144 L-4.40893546,111.675144 C-8.77412698,111.675144 -12.3248558,108.130732 -12.3248558,103.758478 C-12.3248558,99.3951199 -8.78077754,95.8418109 -4.40893546,95.8418109 L66.8418109,95.8418109 L66.8418109,24.5910645 C66.8418109,20.225873 70.3862233,16.6751442 74.7584775,16.6751442 C79.1218352,16.6751442 82.6751442,20.2192225 82.6751442,24.5910645 L82.6751442,103.759224 C82.6751442,105.941695 81.7891419,107.920575 80.3566508,109.353886 Z" transform="translate(35.175144, 64.175144) rotate(-45.000000) translate(-35.175144, -64.175144)"></path></svg></span></button></span> Working with TiddlyWiki</a>
-                    </li>
-                    <li class="toc-item-selected">
-                        <a class="tc-tiddlylink tc-tiddlylink-resolves" href="#Customise%20TiddlyWiki"><span class=" tc-reveal"><button class="tc-btn-invisible"><span class=" tc-reveal"><svg class="tc-image-right-arrow tc-image-button" height="22pt" viewbox="0 0 128 128" width="22pt">
-                        <path d="M80.3563798,109.353315 C78.9238993,110.786918 76.9450203,111.675144 74.7592239,111.675144 L-4.40893546,111.675144 C-8.77412698,111.675144 -12.3248558,108.130732 -12.3248558,103.758478 C-12.3248558,99.3951199 -8.78077754,95.8418109 -4.40893546,95.8418109 L66.8418109,95.8418109 L66.8418109,24.5910645 C66.8418109,20.225873 70.3862233,16.6751442 74.7584775,16.6751442 C79.1218352,16.6751442 82.6751442,20.2192225 82.6751442,24.5910645 L82.6751442,103.759224 C82.6751442,105.941695 81.7891419,107.920575 80.3566508,109.353886 Z" transform="translate(35.175144, 64.175144) rotate(-45.000000) translate(-35.175144, -64.175144)"></path></svg></span></button></span> Customise TiddlyWiki</a>
-                    </li>
-                    <li class="toc-item-selected">
-                        <a class="tc-tiddlylink tc-tiddlylink-resolves" href="#Features"><span class=" tc-reveal"><button class="tc-btn-invisible"><span class=" tc-reveal"><svg class="tc-image-right-arrow tc-image-button" height="22pt" viewbox="0 0 128 128" width="22pt">
-                        <path d="M80.3563798,109.353315 C78.9238993,110.786918 76.9450203,111.675144 74.7592239,111.675144 L-4.40893546,111.675144 C-8.77412698,111.675144 -12.3248558,108.130732 -12.3248558,103.758478 C-12.3248558,99.3951199 -8.78077754,95.8418109 -4.40893546,95.8418109 L66.8418109,95.8418109 L66.8418109,24.5910645 C66.8418109,20.225873 70.3862233,16.6751442 74.7584775,16.6751442 C79.1218352,16.6751442 82.6751442,20.2192225 82.6751442,24.5910645 L82.6751442,103.759224 C82.6751442,105.941695 81.7891419,107.920575 80.3566508,109.353886 Z" transform="translate(35.175144, 64.175144) rotate(-45.000000) translate(-35.175144, -64.175144)"></path></svg></span></button></span> Features</a>
-                    </li>
-                    <li class="toc-item-selected">
-                        <a class="tc-tiddlylink tc-tiddlylink-resolves" href="#Languages"><span class=" tc-reveal"><button class="tc-btn-invisible"><span class=" tc-reveal"><svg class="tc-image-right-arrow tc-image-button" height="22pt" viewbox="0 0 128 128" width="22pt">
-                        <path d="M80.3563798,109.353315 C78.9238993,110.786918 76.9450203,111.675144 74.7592239,111.675144 L-4.40893546,111.675144 C-8.77412698,111.675144 -12.3248558,108.130732 -12.3248558,103.758478 C-12.3248558,99.3951199 -8.78077754,95.8418109 -4.40893546,95.8418109 L66.8418109,95.8418109 L66.8418109,24.5910645 C66.8418109,20.225873 70.3862233,16.6751442 74.7584775,16.6751442 C79.1218352,16.6751442 82.6751442,20.2192225 82.6751442,24.5910645 L82.6751442,103.759224 C82.6751442,105.941695 81.7891419,107.920575 80.3566508,109.353886 Z" transform="translate(35.175144, 64.175144) rotate(-45.000000) translate(-35.175144, -64.175144)"></path></svg></span></button></span> Languages</a>
-                    </li>
-                    <li class="toc-item-selected">
-                        <a class="tc-tiddlylink tc-tiddlylink-resolves" href="#Editions"><span class=" tc-reveal"><button class="tc-btn-invisible"><span class=" tc-reveal"><svg class="tc-image-right-arrow tc-image-button" height="22pt" viewbox="0 0 128 128" width="22pt">
-                        <path d="M80.3563798,109.353315 C78.9238993,110.786918 76.9450203,111.675144 74.7592239,111.675144 L-4.40893546,111.675144 C-8.77412698,111.675144 -12.3248558,108.130732 -12.3248558,103.758478 C-12.3248558,99.3951199 -8.78077754,95.8418109 -4.40893546,95.8418109 L66.8418109,95.8418109 L66.8418109,24.5910645 C66.8418109,20.225873 70.3862233,16.6751442 74.7584775,16.6751442 C79.1218352,16.6751442 82.6751442,20.2192225 82.6751442,24.5910645 L82.6751442,103.759224 C82.6751442,105.941695 81.7891419,107.920575 80.3566508,109.353886 Z" transform="translate(35.175144, 64.175144) rotate(-45.000000) translate(-35.175144, -64.175144)"></path></svg></span></button></span> Editions</a>
-                    </li>
-                    <li class="toc-item-selected">
-                        <a class="tc-tiddlylink tc-tiddlylink-resolves" href="#Plugins"><span class=" tc-reveal"><button class="tc-btn-invisible"><span class=" tc-reveal"><svg class="tc-image-right-arrow tc-image-button" height="22pt" viewbox="0 0 128 128" width="22pt">
-                        <path d="M80.3563798,109.353315 C78.9238993,110.786918 76.9450203,111.675144 74.7592239,111.675144 L-4.40893546,111.675144 C-8.77412698,111.675144 -12.3248558,108.130732 -12.3248558,103.758478 C-12.3248558,99.3951199 -8.78077754,95.8418109 -4.40893546,95.8418109 L66.8418109,95.8418109 L66.8418109,24.5910645 C66.8418109,20.225873 70.3862233,16.6751442 74.7584775,16.6751442 C79.1218352,16.6751442 82.6751442,20.2192225 82.6751442,24.5910645 L82.6751442,103.759224 C82.6751442,105.941695 81.7891419,107.920575 80.3566508,109.353886 Z" transform="translate(35.175144, 64.175144) rotate(-45.000000) translate(-35.175144, -64.175144)"></path></svg></span></button></span> Plugins</a>
-                    </li>
-                    <li class="toc-item-selected">
-                        <a class="tc-tiddlylink tc-tiddlylink-resolves" href="#Platforms"><span class=" tc-reveal"><button class="tc-btn-invisible"><span class=" tc-reveal"><svg class="tc-image-right-arrow tc-image-button" height="22pt" viewbox="0 0 128 128" width="22pt">
-                        <path d="M80.3563798,109.353315 C78.9238993,110.786918 76.9450203,111.675144 74.7592239,111.675144 L-4.40893546,111.675144 C-8.77412698,111.675144 -12.3248558,108.130732 -12.3248558,103.758478 C-12.3248558,99.3951199 -8.78077754,95.8418109 -4.40893546,95.8418109 L66.8418109,95.8418109 L66.8418109,24.5910645 C66.8418109,20.225873 70.3862233,16.6751442 74.7584775,16.6751442 C79.1218352,16.6751442 82.6751442,20.2192225 82.6751442,24.5910645 L82.6751442,103.759224 C82.6751442,105.941695 81.7891419,107.920575 80.3566508,109.353886 Z" transform="translate(35.175144, 64.175144) rotate(-45.000000) translate(-35.175144, -64.175144)"></path></svg></span></button></span> Platforms</a>
-                    </li>
-                    <li class="toc-item-selected">
-                        <a class="tc-tiddlylink tc-tiddlylink-resolves" href="#Reference"><span class=" tc-reveal"><button class="tc-btn-invisible"><span class=" tc-reveal"><svg class="tc-image-right-arrow tc-image-button" height="22pt" viewbox="0 0 128 128" width="22pt">
-                        <path d="M80.3563798,109.353315 C78.9238993,110.786918 76.9450203,111.675144 74.7592239,111.675144 L-4.40893546,111.675144 C-8.77412698,111.675144 -12.3248558,108.130732 -12.3248558,103.758478 C-12.3248558,99.3951199 -8.78077754,95.8418109 -4.40893546,95.8418109 L66.8418109,95.8418109 L66.8418109,24.5910645 C66.8418109,20.225873 70.3862233,16.6751442 74.7584775,16.6751442 C79.1218352,16.6751442 82.6751442,20.2192225 82.6751442,24.5910645 L82.6751442,103.759224 C82.6751442,105.941695 81.7891419,107.920575 80.3566508,109.353886 Z" transform="translate(35.175144, 64.175144) rotate(-45.000000) translate(-35.175144, -64.175144)"></path></svg></span></button></span> Reference</a>
-                    </li>
-                    <li class="toc-item-selected">
-                        <a class="tc-tiddlylink tc-tiddlylink-resolves" href="#Community"><span class=" tc-reveal"><button class="tc-btn-invisible"><span class=" tc-reveal"><svg class="tc-image-right-arrow tc-image-button" height="22pt" viewbox="0 0 128 128" width="22pt">
-                        <path d="M80.3563798,109.353315 C78.9238993,110.786918 76.9450203,111.675144 74.7592239,111.675144 L-4.40893546,111.675144 C-8.77412698,111.675144 -12.3248558,108.130732 -12.3248558,103.758478 C-12.3248558,99.3951199 -8.78077754,95.8418109 -4.40893546,95.8418109 L66.8418109,95.8418109 L66.8418109,24.5910645 C66.8418109,20.225873 70.3862233,16.6751442 74.7584775,16.6751442 C79.1218352,16.6751442 82.6751442,20.2192225 82.6751442,24.5910645 L82.6751442,103.759224 C82.6751442,105.941695 81.7891419,107.920575 80.3566508,109.353886 Z" transform="translate(35.175144, 64.175144) rotate(-45.000000) translate(-35.175144, -64.175144)"></path></svg></span></button></span> Community</a>
-                    </li>
-                    <li class="toc-item-selected">
-                        <a class="tc-tiddlylink tc-tiddlylink-resolves" href="#About"><span class=" tc-reveal"><button class="tc-btn-invisible"><span class=" tc-reveal"><svg class="tc-image-right-arrow tc-image-button" height="22pt" viewbox="0 0 128 128" width="22pt">
-                        <path d="M80.3563798,109.353315 C78.9238993,110.786918 76.9450203,111.675144 74.7592239,111.675144 L-4.40893546,111.675144 C-8.77412698,111.675144 -12.3248558,108.130732 -12.3248558,103.758478 C-12.3248558,99.3951199 -8.78077754,95.8418109 -4.40893546,95.8418109 L66.8418109,95.8418109 L66.8418109,24.5910645 C66.8418109,20.225873 70.3862233,16.6751442 74.7584775,16.6751442 C79.1218352,16.6751442 82.6751442,20.2192225 82.6751442,24.5910645 L82.6751442,103.759224 C82.6751442,105.941695 81.7891419,107.920575 80.3566508,109.353886 Z" transform="translate(35.175144, 64.175144) rotate(-45.000000) translate(-35.175144, -64.175144)"></path></svg></span></button></span> About</a>
-                    </li>
-                </ol>
-                <p></p>
-            </div>
+            Testing1
+        </div>
+    </div>
+    <div class="c-tab-content tc-tab-content">
+        <div class=" tc-reveal">
+            Testing2
+        </div>
+    </div>
+    <div class="c-tab-content tc-tab-content">
+        <div class=" tc-reveal">
+            Testing3
+        </div>
+    </div>
+    <div class="c-tab-content tc-tab-content">
+        <div class=" tc-reveal">
+            Testing4
         </div>
     </div>
 </div>

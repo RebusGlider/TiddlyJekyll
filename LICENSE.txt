@@ -90,3 +90,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ===================================================================================
 domready.js is from the github repo cms/domready.js
 It is licensed under the MIT license.
+
+===================================================================================
+The code for the responsive tabs in the sidebar is based on the github repo
+CallMeNick/responsive-tabs. It is licensed under the MIT license.
