@@ -27,14 +27,15 @@ function displaySearchResults(results,store) {
 }
 </script>
 <script src="assets/js/querystring.js"></script>
+<script src="assets/js/domready.js"></script>
 <script>
-window.onload = function() {
+domReady(function() {
     var q = querystring.parse(location.search).query;
     if (q) {
         var results = SiteSearch.search(q);
         displaySearchResults(results,posts_store);
     }
-}
+});
 </script>
 <div>
 <div class="tc-titlebar">
