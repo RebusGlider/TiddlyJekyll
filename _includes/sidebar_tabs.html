@@ -127,31 +127,28 @@ domReady(function() {
 }
 </style>
 <div id="tabs" class="tc-tab-set c-tabs no-js">
-    <div class="tc-tab-buttons c-tabs-nav">
-        <button class="c-tab-link tc-tab-selected">Related</button>
-        <button class="c-tab-link ">Recent</button>
-        <button class="c-tab-link">Archives</button>
-        <button class="c-tab-link">Contact</button>
-    </div>
-    <div class="tc-tab-divider"></div>
-    <div class="c-tab-content tc-tab-content selectedContent">
-        <div class=" tc-reveal">
-            Testing1
-        </div>
-    </div>
-    <div class="c-tab-content tc-tab-content">
-        <div class=" tc-reveal">
-            Testing2
-        </div>
-    </div>
-    <div class="c-tab-content tc-tab-content">
-        <div class=" tc-reveal">
-            Testing3
-        </div>
-    </div>
-    <div class="c-tab-content tc-tab-content">
-        <div class=" tc-reveal">
-            Testing4
-        </div>
-    </div>
+	<div class="tc-tab-buttons c-tabs-nav">
+	{% for tab in site.sidebar_tabs %}
+		{%if forloop.first %}	
+			<button class="c-tab-link tc-tab-selected">{{tab.title}}</button>
+		{% else %}
+			<button class="c-tab-link">{{tab.title}}</button>
+		{% endif %}
+	{% endfor %}
+	</div>
+	<div class="tc-tab-divider"></div>
+	{% for tab in site.sidebar_tabs %}
+	{% if forloop.first %}
+		<div class="c-tab-content tc-tab-content selectedContent">
+	{% else %}
+		<div class="c-tab-content tc-tab-content">
+	{% endif %}
+			<div class="tc-reveal">
+				{{tab.content}}
+			</div>
+		</div>
+	{% endfor %}
 </div>
+
+	
+			

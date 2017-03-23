@@ -35,6 +35,8 @@ collections:
     post_tags:
         output: true
         permalink: /tag/:name:output_ext
+    sidebar_tabs: 
+        output: false
 
 defaults:
   - scope:
