@@ -1,10 +1,17 @@
 ---
 layout: default
 ---
-<ul>
-    {% for each_post in site.posts %}
-    <li>
-        <a class="tc-tiddlylink tc-tiddlylink-resolves" href="{{ each_post.url }}">{{ each_post.title }}</a>
-    </li>
-    {% endfor %}
-</ul>
+<div class="tc-link-info">
+{% for each_post in site.posts %}
+	<div class="tc-link-info-item">
+		<h1 class="">
+			<a class="tc-tiddlylink tc-tiddlylink-resolves" href="{{ each_post.url }}">
+				"{{each_post.title}}" {% include author_attribution.html post=each_post %}  
+			</a>
+		</h1>
+		<p>
+		<div class="tc-subtitle">Posted {% include date.html date=each_post.date %}</div>
+		</p>
+		{{ each_post.excerpt }}
+</div>
+{% endfor %}
